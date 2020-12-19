@@ -9,14 +9,20 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
+    let key = "1111"
     let number = "0502274444"
     var count = 0
+    
+    
+  
     
     func checkPhoneNumber(){
         if number == phoneNumber.text{
             count += 1
             phoneNumber.text = ""
-            print(count)
+            countsLabel.text = String(count)
+            UserDefaults.standard.set(count,forKey: key)
         }
     }
     
@@ -30,6 +36,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let data = UserDefaults.standard.data(forKey: key){
+            if let data2 = data as? Int {
+                count = data2
+                countsLabel.text = String(count)
+                
+            }
+        }
          
     }
 
